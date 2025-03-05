@@ -265,11 +265,17 @@ function ProductList({ onHomeClick }) {
 
     const handleAddToCart = (plant) => {
         dispatch(addItem(plant));
-        setAddedToCart((prevState) => ({
-           ...prevState,
-           [plant.name]: true
-         }));
     }
+
+    useEffect(()=> {
+        setAddedToCart({});
+        cart.forEach((item) => {
+            setAddedToCart((prevState) => ({
+                ...prevState,
+                [item.name]: true
+            }));
+        })
+    }, [cart])
 
     return (
         <div>
